@@ -3,6 +3,7 @@ package com.homework.jpql.base;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.containers.wait.strategy.Wait;
 
 public class TestContainersConfig {
     private static final Logger logger = LoggerFactory.getLogger(TestContainersConfig.class);
@@ -17,7 +18,7 @@ public class TestContainersConfig {
 
         public static CustomPostgreSQLContainer getInstance() {
             if (container == null) {
-                container = new CustomPostgreSQLContainer();
+                container = new CustomPostgreSQLContainer().waitingFor(Wait.forListeningPort());
             }
             return container;
         }
