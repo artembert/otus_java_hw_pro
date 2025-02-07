@@ -22,13 +22,16 @@ public class DbServiceClientImpl implements DBServiceClient {
     @Override
     public Client saveClient(Client client) {
         return transactionManager.doInTransaction(session -> {
+            // Cloning of an object with a two-way relationship might produce unexpected results
             var clientCloned = client.clone();
             if (client.getId() == null) {
                 var savedClient = clientDataTemplate.insert(session, clientCloned);
+                // Logging on an object with a lazy field might produce unexpected results
                 log.info("created client: {}", clientCloned);
                 return savedClient;
             }
             var savedClient = clientDataTemplate.update(session, clientCloned);
+            // Logging on an object with a lazy field might produce unexpected results
             log.info("updated client: {}", savedClient);
             return savedClient;
         });
