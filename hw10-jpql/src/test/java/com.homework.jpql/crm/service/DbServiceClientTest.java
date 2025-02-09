@@ -13,7 +13,6 @@ import com.homework.jpql.crm.model.Client;
 class DbServiceClientTest extends AbstractHibernateTest {
 
     @Test
-    @Disabled("Удалить при выполнении ДЗ")
     @DisplayName(" корректно сохранять, изменять и загружать клиента")
     void shouldCorrectSaveClient() {
         // given
