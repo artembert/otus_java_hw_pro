@@ -20,7 +20,7 @@ import lombok.Setter;
 @Table(name = "phone")
 public class Phone {
     @Id
-    @SequenceGenerator(name = "phone_gen", sequenceName = "phone_seq", initialValue = 1, allocationSize = 1)
+    @SequenceGenerator(name = "phone_gen", sequenceName = "phone_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "phone_gen")
     @Column(name = "id", nullable = false)
     private Long id;

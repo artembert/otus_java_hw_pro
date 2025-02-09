@@ -25,7 +25,7 @@ import lombok.Setter;
 public class Client implements Cloneable {
 
     @Id
-    @SequenceGenerator(name = "client_gen", sequenceName = "client_seq", initialValue = 1, allocationSize = 1)
+    @SequenceGenerator(name = "client_gen", sequenceName = "client_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_gen")
     @Column(name = "id")
     private Long id;
@@ -51,19 +51,7 @@ public class Client implements Cloneable {
         this.name = name;
     }
 
-    public Client(Long id, String name, Address address) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-    }
-
-    public <E> Client(Long id, String name, List<Phone> phones) {
-        this.id = id;
-        this.name = name;
-        this.phones = phones;
-    }
-
-    public <E> Client(Long id, String name, Address address, List<Phone> phones) {
+    public Client(Long id, String name, Address address, List<Phone> phones) {
         this.id = id;
         this.name = name;
         this.address = address;
