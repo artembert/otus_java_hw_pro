@@ -2,6 +2,7 @@ package com.homework.jpql.base;
 
 import static com.homework.jpql.demo.DbServiceDemo.HIBERNATE_CFG_FILE;
 
+import com.homework.jpql.crm.model.Address;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.stat.EntityStatistics;
@@ -50,7 +51,7 @@ public abstract class AbstractHibernateTest {
         configuration.setProperty("hibernate.connection.username", dbUserName);
         configuration.setProperty("hibernate.connection.password", dbPassword);
 
-        sessionFactory = HibernateUtils.buildSessionFactory(configuration, Client.class);
+        sessionFactory = HibernateUtils.buildSessionFactory(configuration, Address.class, Client.class);
 
         transactionManager = new TransactionManagerHibernate(sessionFactory);
         clientTemplate = new DataTemplateHibernate<>(Client.class);

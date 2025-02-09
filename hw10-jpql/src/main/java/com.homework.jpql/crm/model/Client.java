@@ -1,12 +1,17 @@
 package com.homework.jpql.crm.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,6 +33,13 @@ public class Client implements Cloneable {
     @Column(name = "name")
     private String name;
 
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name="address_id")
+    private Address address;
+
+    @Transient //TODO: link with a persistent table
+    private List<Phone> phones;
+
     public Client(String name) {
         this.id = null;
         this.name = name;
@@ -39,7 +51,7 @@ public class Client implements Cloneable {
     }
 
     public <E> Client(Long id, String name, Address address, List<Phone> phones) {
-        throw new UnsupportedOperationException();
+        this.phones = phones;
     }
 
     @Override
