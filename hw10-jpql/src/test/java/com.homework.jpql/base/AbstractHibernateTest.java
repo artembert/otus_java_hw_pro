@@ -3,6 +3,7 @@ package com.homework.jpql.base;
 import static com.homework.jpql.demo.DbServiceDemo.HIBERNATE_CFG_FILE;
 
 import com.homework.jpql.crm.model.Address;
+import com.homework.jpql.crm.model.Phone;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.stat.EntityStatistics;
@@ -19,12 +20,11 @@ import com.homework.jpql.crm.service.DBServiceClient;
 import com.homework.jpql.crm.service.DbServiceClientImpl;
 
 public abstract class AbstractHibernateTest {
+    private static TestContainersConfig.CustomPostgreSQLContainer CONTAINER;
     protected SessionFactory sessionFactory;
     protected TransactionManagerHibernate transactionManager;
     protected DataTemplateHibernate<Client> clientTemplate;
     protected DBServiceClient dbServiceClient;
-
-    private static TestContainersConfig.CustomPostgreSQLContainer CONTAINER;
 
     @BeforeAll
     public static void init() {
@@ -51,7 +51,7 @@ public abstract class AbstractHibernateTest {
         configuration.setProperty("hibernate.connection.username", dbUserName);
         configuration.setProperty("hibernate.connection.password", dbPassword);
 
-        sessionFactory = HibernateUtils.buildSessionFactory(configuration, Address.class, Client.class);
+        sessionFactory = HibernateUtils.buildSessionFactory(configuration, Address.class, Client.class, Phone.class);
 
         transactionManager = new TransactionManagerHibernate(sessionFactory);
         clientTemplate = new DataTemplateHibernate<>(Client.class);
