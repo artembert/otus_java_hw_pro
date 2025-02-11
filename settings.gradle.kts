@@ -7,6 +7,7 @@ include("hw06-solid")
 include("hw07-patterns")
 include("hw09-jdbc")
 include("hw10-jpql")
+include("hw12-web-server")
 
 
 pluginManagement {
