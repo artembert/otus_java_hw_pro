@@ -1,6 +1,4 @@
 dependencies {
-    implementation(project(":hw09-jdbc"))
-
     implementation("ch.qos.logback:logback-classic")
     implementation("org.flywaydb:flyway-core")
     implementation("org.flywaydb:flyway-database-postgresql")
