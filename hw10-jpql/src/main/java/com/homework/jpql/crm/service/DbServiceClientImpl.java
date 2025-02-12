@@ -1,12 +1,12 @@
 package com.homework.jpql.crm.service;
 
+import com.homework.jpql.core.repository.DataTemplate;
+import com.homework.jpql.core.sessionmanager.TransactionManager;
+import com.homework.jpql.crm.model.Client;
 import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.homework.jpql.core.repository.DataTemplate;
-import com.homework.jpql.core.sessionmanager.TransactionManager;
-import com.homework.jpql.crm.model.Client;
 
 public class DbServiceClientImpl implements DBServiceClient {
     private static final Logger log = LoggerFactory.getLogger(DbServiceClientImpl.class);

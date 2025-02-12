@@ -18,8 +18,11 @@ class DbServiceClientTest extends AbstractHibernateTest {
     @DisplayName(" корректно сохранять, изменять и загружать клиента")
     void shouldCorrectSaveClient() {
         // given
-        var client = new Client(null, "Vasya", new Address(null, "AnyStreet"), List.of(new Phone(null, "13-555-22"),
-            new Phone(null, "14-666-333")));
+        var client = new Client(
+                null,
+                "Vasya",
+                new Address(null, "AnyStreet"),
+                List.of(new Phone(null, "13-555-22"), new Phone(null, "14-666-333")));
 
         // when
         var savedClient = dbServiceClient.saveClient(client);
@@ -28,10 +31,10 @@ class DbServiceClientTest extends AbstractHibernateTest {
         // then
         var loadedSavedClient = dbServiceClient.getClient(savedClient.getId());
         assertThat(loadedSavedClient)
-            .isPresent()
-            .get()
-            .usingRecursiveComparison()
-            .isEqualTo(savedClient);
+                .isPresent()
+                .get()
+                .usingRecursiveComparison()
+                .isEqualTo(savedClient);
 
         // when
         var savedClientUpdated = loadedSavedClient.get();

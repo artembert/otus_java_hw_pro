@@ -1,8 +1,8 @@
 package com.homework.jpql.crm.service;
 
+import com.homework.jpql.crm.model.Client;
 import java.util.List;
 import java.util.Optional;
-import com.homework.jpql.crm.model.Client;
 
 public interface DBServiceClient {
 

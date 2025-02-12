@@ -1,14 +1,14 @@
 package com.homework.jpql.demo;
 
-import org.hibernate.cfg.Configuration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import com.homework.jpql.core.repository.DataTemplateHibernate;
 import com.homework.jpql.core.repository.HibernateUtils;
 import com.homework.jpql.core.sessionmanager.TransactionManagerHibernate;
 import com.homework.jpql.crm.dbmigrations.MigrationsExecutorFlyway;
 import com.homework.jpql.crm.model.Client;
 import com.homework.jpql.crm.service.DbServiceClientImpl;
+import org.hibernate.cfg.Configuration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DbServiceDemo {
 

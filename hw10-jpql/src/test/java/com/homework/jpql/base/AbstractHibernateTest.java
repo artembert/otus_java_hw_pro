@@ -2,8 +2,15 @@ package com.homework.jpql.base;
 
 import static com.homework.jpql.demo.DbServiceDemo.HIBERNATE_CFG_FILE;
 
+import com.homework.jpql.core.repository.DataTemplateHibernate;
+import com.homework.jpql.core.repository.HibernateUtils;
+import com.homework.jpql.core.sessionmanager.TransactionManagerHibernate;
+import com.homework.jpql.crm.dbmigrations.MigrationsExecutorFlyway;
 import com.homework.jpql.crm.model.Address;
+import com.homework.jpql.crm.model.Client;
 import com.homework.jpql.crm.model.Phone;
+import com.homework.jpql.crm.service.DBServiceClient;
+import com.homework.jpql.crm.service.DbServiceClientImpl;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.stat.EntityStatistics;
@@ -11,13 +18,6 @@ import org.hibernate.stat.Statistics;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import com.homework.jpql.core.repository.DataTemplateHibernate;
-import com.homework.jpql.core.repository.HibernateUtils;
-import com.homework.jpql.core.sessionmanager.TransactionManagerHibernate;
-import com.homework.jpql.crm.dbmigrations.MigrationsExecutorFlyway;
-import com.homework.jpql.crm.model.Client;
-import com.homework.jpql.crm.service.DBServiceClient;
-import com.homework.jpql.crm.service.DbServiceClientImpl;
 
 public abstract class AbstractHibernateTest {
     private static TestContainersConfig.CustomPostgreSQLContainer CONTAINER;
