@@ -1,10 +1,8 @@
 package com.homework.webserver.servlet;
 
 import com.google.gson.Gson;
-import com.homework.webserver.crm.model.Address;
-import com.homework.webserver.crm.model.Client;
-import com.homework.webserver.crm.model.Phone;
 import com.homework.webserver.dao.UserDao;
+import com.homework.webserver.services.DatabaseManager;
 import com.homework.webserver.services.TemplateProcessor;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,8 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @SuppressWarnings({"java:S1989"})
 public class ClientsServlet extends HttpServlet {
@@ -21,16 +17,13 @@ public class ClientsServlet extends HttpServlet {
     private static final String PARAM_NAME = "name";
     private static final String PARAM_ADDRESS = "address";
     private static final String PARAM_PHONE = "phone";
-    private static final Logger log = LoggerFactory.getLogger(ClientsServlet.class);
 
-    private final transient UserDao userDao;
-    private final transient Gson gson;
     private final transient TemplateProcessor templateProcessor;
+    private final DatabaseManager databaseManager;
 
     public ClientsServlet(TemplateProcessor templateProcessor, UserDao userDao, Gson gson) {
         this.templateProcessor = templateProcessor;
-        this.userDao = userDao;
-        this.gson = gson;
+        this.databaseManager = new DatabaseManager();
     }
 
     @Override
@@ -52,9 +45,10 @@ public class ClientsServlet extends HttpServlet {
 
     private HashMap<String, Object> getParamsMap() {
         HashMap<String, Object> paramsMap = new HashMap<>();
-        paramsMap.put("clients", List.of(new Client(1L, "John Show", new Address(1L, "Winterfell, The North, Westeros"),
-            List.of(new Phone(1L, "+123 456 78 90"), new Phone(1L, "+413 419 923 12 42")))
-        ));
+        var clients = databaseManager.getDbServiceClient().findAll();
+        if (clients != null) {
+            paramsMap.put("clients", clients);
+        }
         return paramsMap;
     }
 }
