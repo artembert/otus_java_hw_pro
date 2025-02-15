@@ -1,13 +1,21 @@
-﻿<html xmlns="http://www.w3.org/1999/xhtml" content="text/html;">
+﻿<!doctype html>
+<html lang="en">
 <head>
     <title>Index</title>
+    <link rel="stylesheet" href="./xp.css"/>
+    <link rel="stylesheet" href="./global.css"/>
+    <script src="./tailwind-css.global.js"></script>
 </head>
-<body>
-<div class="top">
-    <img src="img/logo.svg" style="width: 300px; height: 300px">
-    <br/>
-    <h3>Добро пожаловать на стартовую страницу примера</h3>
-    <a href="users">Перейти на странцу информации о пользователях (возможно защищено паролем)</a>
+<body class="grid place-items-center p-8 h-screen">
+<div class="window" style="width: 300px">
+    <div class="title-bar">
+        <div class="title-bar-text">Clients</div>
+    </div>
+    <div class="window-body flex flex-col items-center pb-4">
+        <img alt="Windows XP logo" src="img/logo.png" width="160px" height="160px">
+        <h3>Welcome</h3>
+        <button onclick="window.location.replace('/clients')" class="mt-2">to Clients</button>
+    </div>
 </div>
 </body>
 </html>
