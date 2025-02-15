@@ -1,13 +1,13 @@
 package com.homework.webserver.servlet;
 
 import com.google.gson.Gson;
+import com.homework.webserver.dao.UserDao;
+import com.homework.webserver.model.User;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import com.homework.webserver.dao.UserDao;
-import com.homework.webserver.model.User;
 
 @SuppressWarnings({"java:S1989"})
 public class UsersApiServlet extends HttpServlet {

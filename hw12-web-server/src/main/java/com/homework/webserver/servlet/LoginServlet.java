@@ -2,6 +2,8 @@ package com.homework.webserver.servlet;
 
 import static jakarta.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
 
+import com.homework.webserver.services.TemplateProcessor;
+import com.homework.webserver.services.UserAuthService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,8 +11,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Collections;
-import com.homework.webserver.services.TemplateProcessor;
-import com.homework.webserver.services.UserAuthService;
 
 @SuppressWarnings({"java:S1989"})
 public class LoginServlet extends HttpServlet {

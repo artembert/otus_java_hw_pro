@@ -2,11 +2,6 @@ package com.homework.webserver;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import java.net.URI;
-import org.eclipse.jetty.security.HashLoginService;
-import org.eclipse.jetty.security.LoginService;
-import org.eclipse.jetty.util.resource.PathResourceFactory;
-import org.eclipse.jetty.util.resource.Resource;
 import com.homework.webserver.dao.InMemoryUserDao;
 import com.homework.webserver.dao.UserDao;
 import com.homework.webserver.helpers.FileSystemHelper;
@@ -14,6 +9,11 @@ import com.homework.webserver.server.UsersWebServer;
 import com.homework.webserver.server.UsersWebServerWithBasicSecurity;
 import com.homework.webserver.services.TemplateProcessor;
 import com.homework.webserver.services.TemplateProcessorImpl;
+import java.net.URI;
+import org.eclipse.jetty.security.HashLoginService;
+import org.eclipse.jetty.security.LoginService;
+import org.eclipse.jetty.util.resource.PathResourceFactory;
+import org.eclipse.jetty.util.resource.Resource;
 
 /*
     Полезные для демо ссылки

@@ -1,7 +1,7 @@
 package com.homework.webserver.dao;
 
-import java.util.Optional;
 import com.homework.webserver.model.User;
+import java.util.Optional;
 
 public interface UserDao {
 

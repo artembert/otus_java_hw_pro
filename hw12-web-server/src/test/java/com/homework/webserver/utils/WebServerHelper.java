@@ -1,4 +1,4 @@
-package com.homework.webserver.server.utils;
+package com.homework.webserver.utils;
 
 import java.util.Arrays;
 import java.util.Optional;

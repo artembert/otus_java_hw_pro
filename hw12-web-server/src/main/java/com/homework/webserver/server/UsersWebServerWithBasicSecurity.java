@@ -1,6 +1,8 @@
 package com.homework.webserver.server;
 
 import com.google.gson.Gson;
+import com.homework.webserver.dao.UserDao;
+import com.homework.webserver.services.TemplateProcessor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,8 +13,6 @@ import org.eclipse.jetty.security.Constraint;
 import org.eclipse.jetty.security.LoginService;
 import org.eclipse.jetty.security.authentication.BasicAuthenticator;
 import org.eclipse.jetty.server.Handler;
-import com.homework.webserver.dao.UserDao;
-import com.homework.webserver.services.TemplateProcessor;
 
 public class UsersWebServerWithBasicSecurity extends UsersWebServerSimple {
     private static final String ROLE_NAME_USER = "user";

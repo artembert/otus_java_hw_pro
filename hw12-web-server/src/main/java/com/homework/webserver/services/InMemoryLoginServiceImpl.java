@@ -1,13 +1,13 @@
 package com.homework.webserver.services;
 
+import com.homework.webserver.dao.UserDao;
+import com.homework.webserver.model.User;
 import java.util.List;
 import java.util.Optional;
 import org.eclipse.jetty.security.AbstractLoginService;
 import org.eclipse.jetty.security.RolePrincipal;
 import org.eclipse.jetty.security.UserPrincipal;
 import org.eclipse.jetty.util.security.Password;
-import com.homework.webserver.dao.UserDao;
-import com.homework.webserver.model.User;
 
 public class InMemoryLoginServiceImpl extends AbstractLoginService {
 

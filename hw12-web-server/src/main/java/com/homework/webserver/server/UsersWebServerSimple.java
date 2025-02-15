@@ -1,24 +1,23 @@
 package com.homework.webserver.server;
 
 import com.google.gson.Gson;
-import org.eclipse.jetty.ee10.servlet.ServletContextHandler;
-import org.eclipse.jetty.ee10.servlet.ServletHolder;
-import org.eclipse.jetty.server.Handler;
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.handler.ResourceHandler;
 import com.homework.webserver.dao.UserDao;
 import com.homework.webserver.helpers.FileSystemHelper;
 import com.homework.webserver.services.TemplateProcessor;
 import com.homework.webserver.servlet.UsersApiServlet;
 import com.homework.webserver.servlet.UsersServlet;
+import org.eclipse.jetty.ee10.servlet.ServletContextHandler;
+import org.eclipse.jetty.ee10.servlet.ServletHolder;
+import org.eclipse.jetty.server.Handler;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.ResourceHandler;
 
 public class UsersWebServerSimple implements UsersWebServer {
     private static final String START_PAGE_NAME = "index.html";
     private static final String COMMON_RESOURCES_DIR = "static";
-
+    protected final TemplateProcessor templateProcessor;
     private final UserDao userDao;
     private final Gson gson;
-    protected final TemplateProcessor templateProcessor;
     private final Server server;
 
     public UsersWebServerSimple(int port, UserDao userDao, Gson gson, TemplateProcessor templateProcessor) {

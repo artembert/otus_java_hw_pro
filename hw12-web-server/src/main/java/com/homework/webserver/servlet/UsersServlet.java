@@ -1,13 +1,13 @@
 package com.homework.webserver.servlet;
 
+import com.homework.webserver.dao.UserDao;
+import com.homework.webserver.services.TemplateProcessor;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import com.homework.webserver.dao.UserDao;
-import com.homework.webserver.services.TemplateProcessor;
 
 @SuppressWarnings({"java:S1989"})
 public class UsersServlet extends HttpServlet {

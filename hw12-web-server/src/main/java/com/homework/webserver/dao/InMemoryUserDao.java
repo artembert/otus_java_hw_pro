@@ -1,10 +1,10 @@
 package com.homework.webserver.dao;
 
+import com.homework.webserver.model.User;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
-import com.homework.webserver.model.User;
 
 public class InMemoryUserDao implements UserDao {
 

@@ -1,16 +1,16 @@
 package com.homework.webserver.server;
 
 import com.google.gson.Gson;
-import java.util.Arrays;
-import org.eclipse.jetty.ee10.servlet.FilterHolder;
-import org.eclipse.jetty.ee10.servlet.ServletContextHandler;
-import org.eclipse.jetty.ee10.servlet.ServletHolder;
-import org.eclipse.jetty.server.Handler;
 import com.homework.webserver.dao.UserDao;
 import com.homework.webserver.services.TemplateProcessor;
 import com.homework.webserver.services.UserAuthService;
 import com.homework.webserver.servlet.AuthorizationFilter;
 import com.homework.webserver.servlet.LoginServlet;
+import java.util.Arrays;
+import org.eclipse.jetty.ee10.servlet.FilterHolder;
+import org.eclipse.jetty.ee10.servlet.ServletContextHandler;
+import org.eclipse.jetty.ee10.servlet.ServletHolder;
+import org.eclipse.jetty.server.Handler;
 
 public class UsersWebServerWithFilterBasedSecurity extends UsersWebServerSimple {
     private final UserAuthService authService;

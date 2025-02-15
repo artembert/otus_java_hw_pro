@@ -1,12 +1,17 @@
-package com.homework.webserver.server;
+package com.homework.webserver;
 
+import static com.homework.webserver.utils.WebServerHelper.buildUrl;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
-import static com.homework.webserver.server.utils.WebServerHelper.buildUrl;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.homework.webserver.dao.UserDao;
+import com.homework.webserver.model.User;
+import com.homework.webserver.server.UsersWebServer;
+import com.homework.webserver.server.UsersWebServerSimple;
+import com.homework.webserver.services.TemplateProcessor;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -17,9 +22,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import com.homework.webserver.dao.UserDao;
-import com.homework.webserver.model.User;
-import com.homework.webserver.services.TemplateProcessor;
 
 @DisplayName("Тест сервера должен ")
 class UsersWebServerImplTest {
