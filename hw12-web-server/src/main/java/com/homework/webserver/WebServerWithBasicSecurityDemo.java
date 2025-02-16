@@ -1,5 +1,6 @@
 package com.homework.webserver;
 
+import com.homework.webserver.crm.service.DBServiceAccount;
 import com.homework.webserver.crm.service.DBServiceClient;
 import com.homework.webserver.helpers.FileSystemHelper;
 import com.homework.webserver.server.UsersWebServer;
@@ -43,9 +44,10 @@ public class WebServerWithBasicSecurityDemo {
         // LoginService loginService = new InMemoryLoginServiceImpl(userDao); // NOSONAR
         var databaseManager = new DatabaseManager();
         DBServiceClient dbServiceClient = databaseManager.getDbServiceClient();
+        DBServiceAccount dbServiceAccount = databaseManager.getDbServiceAccount();
 
-        UsersWebServer usersWebServer =
-                new UsersWebServerWithBasicSecurity(WEB_SERVER_PORT, loginService, templateProcessor, dbServiceClient);
+        UsersWebServer usersWebServer = new UsersWebServerWithBasicSecurity(
+                WEB_SERVER_PORT, loginService, templateProcessor, dbServiceClient, dbServiceAccount);
 
         usersWebServer.start();
         usersWebServer.join();

@@ -1,5 +1,6 @@
 package com.homework.webserver;
 
+import com.homework.webserver.crm.service.DBServiceAccount;
 import com.homework.webserver.crm.service.DBServiceClient;
 import com.homework.webserver.server.UsersWebServer;
 import com.homework.webserver.server.UsersWebServerSimple;
@@ -27,8 +28,10 @@ public class WebServerSimpleDemo {
         TemplateProcessor templateProcessor = new TemplateProcessorImpl(TEMPLATES_DIR);
         var databaseManager = new DatabaseManager();
         DBServiceClient dbServiceClient = databaseManager.getDbServiceClient();
+        DBServiceAccount dbServiceAccount = databaseManager.getDbServiceAccount();
 
-        UsersWebServer usersWebServer = new UsersWebServerSimple(WEB_SERVER_PORT, templateProcessor, dbServiceClient);
+        UsersWebServer usersWebServer =
+                new UsersWebServerSimple(WEB_SERVER_PORT, templateProcessor, dbServiceClient, dbServiceAccount);
 
         usersWebServer.start();
         usersWebServer.join();

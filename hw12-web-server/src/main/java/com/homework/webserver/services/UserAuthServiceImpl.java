@@ -1,19 +1,17 @@
 package com.homework.webserver.services;
 
-import com.homework.webserver.dao.UserDao;
+import com.homework.webserver.crm.service.DBServiceAccount;
 
 public class UserAuthServiceImpl implements UserAuthService {
 
-    private final UserDao userDao;
+    private final DBServiceAccount dbServiceAccount;
 
-    public UserAuthServiceImpl(UserDao userDao) {
-        this.userDao = userDao;
+    public UserAuthServiceImpl(DBServiceAccount dbServiceAccount) {
+        this.dbServiceAccount = dbServiceAccount;
     }
 
     @Override
-    public boolean authenticate(String login, String password) {
-        return userDao.findByLogin(login)
-                .map(user -> user.getPassword().equals(password))
-                .orElse(false);
+    public boolean authenticate(String email, String password) {
+        return dbServiceAccount.isPasswordValid(email, password);
     }
 }

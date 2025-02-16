@@ -1,5 +1,6 @@
 package com.homework.webserver.server;
 
+import com.homework.webserver.crm.service.DBServiceAccount;
 import com.homework.webserver.crm.service.DBServiceClient;
 import com.homework.webserver.helpers.FileSystemHelper;
 import com.homework.webserver.services.TemplateProcessor;
@@ -16,11 +17,17 @@ public class UsersWebServerSimple implements UsersWebServer {
 
     protected final TemplateProcessor templateProcessor;
     protected final DBServiceClient dbServiceClient;
+    protected final DBServiceAccount dbServiceAccount;
     private final Server server;
 
-    public UsersWebServerSimple(int port, TemplateProcessor templateProcessor, DBServiceClient dbServiceClient) {
+    public UsersWebServerSimple(
+            int port,
+            TemplateProcessor templateProcessor,
+            DBServiceClient dbServiceClient,
+            DBServiceAccount dbServiceAccount) {
         this.templateProcessor = templateProcessor;
         this.dbServiceClient = dbServiceClient;
+        this.dbServiceAccount = dbServiceAccount;
         server = new Server(port);
     }
 
