@@ -4,7 +4,6 @@ import static com.homework.webserver.utils.WebServerHelper.buildUrl;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
-import com.google.gson.GsonBuilder;
 import com.homework.webserver.crm.service.DBServiceAccount;
 import com.homework.webserver.crm.service.DBServiceClient;
 import com.homework.webserver.server.UsersWebServer;
@@ -15,7 +14,6 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.List;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -52,12 +50,12 @@ class UsersWebServerImplTest {
     @Test
     void shouldReturnCorrectUserWhenAuthorized() throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
-            .GET()
-            .uri(URI.create(buildUrl(WEB_SERVER_URL, CLIENTS_URL)))
-            .build();
+                .GET()
+                .uri(URI.create(buildUrl(WEB_SERVER_URL, CLIENTS_URL)))
+                .build();
         HttpResponse<String> response = http.send(request, HttpResponse.BodyHandlers.ofString());
 
         assertThat(response.statusCode()).isEqualTo(HttpURLConnection.HTTP_OK);
-        assertThat(response.headers().map().get("Content-Type")).isEqualTo(List.of("text/html;charset=utf-8"));
+        assertThat(response.headers().map().get("Content-Type")).containsExactly("text/html;charset=utf-8");
     }
 }
