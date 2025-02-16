@@ -40,8 +40,13 @@ public class WebServerWithBasicSecurityDemo {
         PathResourceFactory pathResourceFactory = new PathResourceFactory();
         Resource configResource = pathResourceFactory.newResource(URI.create(hashLoginServiceConfigPath));
 
+        UsersWebServer usersWebServer = getUsersWebServer(configResource, templateProcessor);
+        usersWebServer.join();
+    }
+
+    private static UsersWebServer getUsersWebServer(Resource configResource, TemplateProcessor templateProcessor)
+            throws Exception {
         LoginService loginService = new HashLoginService(REALM_NAME, configResource);
-        // LoginService loginService = new InMemoryLoginServiceImpl(userDao); // NOSONAR
         var databaseManager = new DatabaseManager();
         DBServiceClient dbServiceClient = databaseManager.getDbServiceClient();
         DBServiceAccount dbServiceAccount = databaseManager.getDbServiceAccount();
@@ -50,6 +55,6 @@ public class WebServerWithBasicSecurityDemo {
                 WEB_SERVER_PORT, loginService, templateProcessor, dbServiceClient, dbServiceAccount);
 
         usersWebServer.start();
-        usersWebServer.join();
+        return usersWebServer;
     }
 }

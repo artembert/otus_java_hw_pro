@@ -2,14 +2,12 @@ package com.homework.webserver;
 
 import static com.homework.webserver.utils.WebServerHelper.buildUrl;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.homework.webserver.crm.service.DBServiceAccount;
 import com.homework.webserver.crm.service.DBServiceClient;
-import com.homework.webserver.dao.UserDao;
 import com.homework.webserver.model.User;
 import com.homework.webserver.server.UsersWebServer;
 import com.homework.webserver.server.UsersWebServerSimple;
@@ -19,7 +17,6 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Optional;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -47,9 +44,6 @@ class UsersWebServerImplTest {
         TemplateProcessor templateProcessor = mock(TemplateProcessor.class);
         DBServiceClient dbServiceClient = mock(DBServiceClient.class);
         DBServiceAccount dbServiceAccount = mock(DBServiceAccount.class);
-        UserDao userDao = mock(UserDao.class);
-
-        given(userDao.findById(DEFAULT_USER_ID)).willReturn(Optional.of(DEFAULT_USER));
 
         gson = new GsonBuilder().serializeNulls().create();
         webServer = new UsersWebServerSimple(WEB_SERVER_PORT, templateProcessor, dbServiceClient, dbServiceAccount);

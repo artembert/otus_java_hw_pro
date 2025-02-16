@@ -21,14 +21,13 @@ public class DbServiceAccountImpl implements DBServiceAccount {
     @Override
     public boolean isPasswordValid(String email, String password) {
         return Optional.ofNullable(transactionManager.doInReadOnlyTransaction(session -> {
-                var result = accountDataTemplate
-                    .findByEntityField(session, "email", email);
-                if (result.isEmpty()) {
-                    return false;
-                }
-                log.info("account found: {}", result.getFirst());
-                return result.getFirst().getPassword().equals(password);
-            }))
-            .orElse(false);
+                    var result = accountDataTemplate.findByEntityField(session, "email", email);
+                    if (result.isEmpty()) {
+                        return false;
+                    }
+                    log.info("account found: {}", result.getFirst());
+                    return result.getFirst().getPassword().equals(password);
+                }))
+                .orElse(false);
     }
 }

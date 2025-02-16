@@ -30,8 +30,8 @@ public class DatabaseManager {
 
         new MigrationsExecutorFlyway(dbUrl, dbUserName, dbPassword).executeMigrations();
 
-        var sessionFactory =
-                HibernateUtils.buildSessionFactory(configuration, Client.class, Address.class, Phone.class, Account.class);
+        var sessionFactory = HibernateUtils.buildSessionFactory(
+                configuration, Client.class, Address.class, Phone.class, Account.class);
 
         var transactionManager = new TransactionManagerHibernate(sessionFactory);
         ///
