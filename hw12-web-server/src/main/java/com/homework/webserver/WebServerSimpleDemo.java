@@ -1,9 +1,5 @@
 package com.homework.webserver;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.homework.webserver.dao.InMemoryUserDao;
-import com.homework.webserver.dao.UserDao;
 import com.homework.webserver.server.UsersWebServer;
 import com.homework.webserver.server.UsersWebServerSimple;
 import com.homework.webserver.services.TemplateProcessor;
@@ -26,11 +22,9 @@ public class WebServerSimpleDemo {
     private static final String TEMPLATES_DIR = "/templates/";
 
     public static void main(String[] args) throws Exception {
-        UserDao userDao = new InMemoryUserDao();
-        Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
         TemplateProcessor templateProcessor = new TemplateProcessorImpl(TEMPLATES_DIR);
 
-        UsersWebServer usersWebServer = new UsersWebServerSimple(WEB_SERVER_PORT, userDao, gson, templateProcessor);
+        UsersWebServer usersWebServer = new UsersWebServerSimple(WEB_SERVER_PORT, templateProcessor);
 
         usersWebServer.start();
         usersWebServer.join();

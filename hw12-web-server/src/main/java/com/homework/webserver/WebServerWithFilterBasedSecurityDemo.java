@@ -1,7 +1,5 @@
 package com.homework.webserver;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.homework.webserver.dao.InMemoryUserDao;
 import com.homework.webserver.dao.UserDao;
 import com.homework.webserver.server.UsersWebServer;
@@ -29,12 +27,11 @@ public class WebServerWithFilterBasedSecurityDemo {
 
     public static void main(String[] args) throws Exception {
         UserDao userDao = new InMemoryUserDao();
-        Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
         TemplateProcessor templateProcessor = new TemplateProcessorImpl(TEMPLATES_DIR);
         UserAuthService authService = new UserAuthServiceImpl(userDao);
 
-        UsersWebServer usersWebServer = new UsersWebServerWithFilterBasedSecurity(
-                WEB_SERVER_PORT, authService, userDao, gson, templateProcessor);
+        UsersWebServer usersWebServer =
+                new UsersWebServerWithFilterBasedSecurity(WEB_SERVER_PORT, authService, templateProcessor);
 
         usersWebServer.start();
         usersWebServer.join();

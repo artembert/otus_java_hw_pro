@@ -1,10 +1,8 @@
 package com.homework.webserver.servlet;
 
-import com.google.gson.Gson;
 import com.homework.webserver.crm.model.Address;
 import com.homework.webserver.crm.model.Client;
 import com.homework.webserver.crm.model.Phone;
-import com.homework.webserver.dao.UserDao;
 import com.homework.webserver.services.DatabaseManager;
 import com.homework.webserver.services.TemplateProcessor;
 import jakarta.servlet.http.HttpServlet;
@@ -24,9 +22,9 @@ public class ClientsServlet extends HttpServlet {
     private static final String PARAM_PHONE = "phone";
     private static final Logger log = LoggerFactory.getLogger(ClientsServlet.class);
     private final transient TemplateProcessor templateProcessor;
-    private final DatabaseManager databaseManager;
+    private final transient DatabaseManager databaseManager;
 
-    public ClientsServlet(TemplateProcessor templateProcessor, UserDao userDao, Gson gson) {
+    public ClientsServlet(TemplateProcessor templateProcessor) {
         this.templateProcessor = templateProcessor;
         this.databaseManager = new DatabaseManager();
     }
@@ -67,8 +65,8 @@ public class ClientsServlet extends HttpServlet {
     }
 
     private void insertClient(String name, String address, String phone) {
-        databaseManager.getDbServiceClient().saveClient(
-            new Client(null, name, new Address(null, address), List.of(new Phone(null, phone)))
-        );
+        databaseManager
+                .getDbServiceClient()
+                .saveClient(new Client(null, name, new Address(null, address), List.of(new Phone(null, phone))));
     }
 }

@@ -48,7 +48,7 @@ class UsersWebServerImplTest {
         given(userDao.findById(DEFAULT_USER_ID)).willReturn(Optional.of(DEFAULT_USER));
 
         gson = new GsonBuilder().serializeNulls().create();
-        webServer = new UsersWebServerSimple(WEB_SERVER_PORT, userDao, gson, templateProcessor);
+        webServer = new UsersWebServerSimple(WEB_SERVER_PORT, templateProcessor);
         webServer.start();
     }
 

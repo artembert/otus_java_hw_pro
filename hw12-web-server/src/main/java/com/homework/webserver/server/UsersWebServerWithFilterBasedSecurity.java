@@ -1,7 +1,5 @@
 package com.homework.webserver.server;
 
-import com.google.gson.Gson;
-import com.homework.webserver.dao.UserDao;
 import com.homework.webserver.services.TemplateProcessor;
 import com.homework.webserver.services.UserAuthService;
 import com.homework.webserver.servlet.AuthorizationFilter;
@@ -16,8 +14,8 @@ public class UsersWebServerWithFilterBasedSecurity extends UsersWebServerSimple 
     private final UserAuthService authService;
 
     public UsersWebServerWithFilterBasedSecurity(
-            int port, UserAuthService authService, UserDao userDao, Gson gson, TemplateProcessor templateProcessor) {
-        super(port, userDao, gson, templateProcessor);
+            int port, UserAuthService authService, TemplateProcessor templateProcessor) {
+        super(port, templateProcessor);
         this.authService = authService;
     }
 

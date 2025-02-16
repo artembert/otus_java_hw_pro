@@ -1,7 +1,5 @@
 package com.homework.webserver.server;
 
-import com.google.gson.Gson;
-import com.homework.webserver.dao.UserDao;
 import com.homework.webserver.services.TemplateProcessor;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,9 +18,8 @@ public class UsersWebServerWithBasicSecurity extends UsersWebServerSimple {
 
     private final LoginService loginService;
 
-    public UsersWebServerWithBasicSecurity(
-            int port, LoginService loginService, UserDao userDao, Gson gson, TemplateProcessor templateProcessor) {
-        super(port, userDao, gson, templateProcessor);
+    public UsersWebServerWithBasicSecurity(int port, LoginService loginService, TemplateProcessor templateProcessor) {
+        super(port, templateProcessor);
         this.loginService = loginService;
     }
 

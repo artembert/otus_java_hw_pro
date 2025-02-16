@@ -1,9 +1,5 @@
 package com.homework.webserver;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.homework.webserver.dao.InMemoryUserDao;
-import com.homework.webserver.dao.UserDao;
 import com.homework.webserver.helpers.FileSystemHelper;
 import com.homework.webserver.server.UsersWebServer;
 import com.homework.webserver.server.UsersWebServerWithBasicSecurity;
@@ -34,8 +30,6 @@ public class WebServerWithBasicSecurityDemo {
     private static final String REALM_NAME = "AnyRealm";
 
     public static void main(String[] args) throws Exception {
-        UserDao userDao = new InMemoryUserDao();
-        Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
         TemplateProcessor templateProcessor = new TemplateProcessorImpl(TEMPLATES_DIR);
 
         String hashLoginServiceConfigPath =
@@ -47,7 +41,7 @@ public class WebServerWithBasicSecurityDemo {
         // LoginService loginService = new InMemoryLoginServiceImpl(userDao); // NOSONAR
 
         UsersWebServer usersWebServer =
-                new UsersWebServerWithBasicSecurity(WEB_SERVER_PORT, loginService, userDao, gson, templateProcessor);
+                new UsersWebServerWithBasicSecurity(WEB_SERVER_PORT, loginService, templateProcessor);
 
         usersWebServer.start();
         usersWebServer.join();
