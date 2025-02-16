@@ -9,16 +9,11 @@ import com.homework.webserver.services.TemplateProcessor;
 import com.homework.webserver.services.TemplateProcessorImpl;
 
 /*
-    Полезные для демо ссылки
-
-    // Стартовая страница
+    // Main page
     http://localhost:8080
 
-    // Страница пользователей
-    http://localhost:8080/users
-
-    // REST сервис
-    http://localhost:8080/api/user/3
+    // Clients page
+    http://localhost:8080/clients
 */
 public class WebServerSimpleDemo {
     private static final int WEB_SERVER_PORT = 8080;
