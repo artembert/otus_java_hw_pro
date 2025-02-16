@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
 
 @SuppressWarnings({"java:S1989"})
 public class LoginServlet extends HttpServlet {
@@ -46,7 +47,11 @@ public class LoginServlet extends HttpServlet {
             session.setMaxInactiveInterval(MAX_INACTIVE_INTERVAL);
             response.sendRedirect("/clients");
         } else {
+            HashMap<String, Object> paramsMap = new HashMap<>();
+            paramsMap.put("pageError", "Incorrect login or password");
             response.setStatus(SC_UNAUTHORIZED);
+            response.setContentType("text/html");
+            response.getWriter().println(templateProcessor.getPage(LOGIN_PAGE_TEMPLATE, paramsMap));
         }
     }
 }
