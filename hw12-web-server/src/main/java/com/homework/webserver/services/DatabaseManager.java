@@ -9,11 +9,13 @@ import com.homework.webserver.crm.model.Client;
 import com.homework.webserver.crm.model.Phone;
 import com.homework.webserver.crm.service.DBServiceClient;
 import com.homework.webserver.crm.service.DbServiceClientImpl;
+import lombok.Getter;
 import org.hibernate.cfg.Configuration;
 
+@Getter
 public class DatabaseManager {
     public static final String HIBERNATE_CFG_FILE = "hibernate.cfg.xml";
-    private DBServiceClient dbServiceClient;
+    private final DBServiceClient dbServiceClient;
 
     public DatabaseManager() {
         var configuration = new Configuration().configure(HIBERNATE_CFG_FILE);
@@ -32,9 +34,5 @@ public class DatabaseManager {
         var clientTemplate = new DataTemplateHibernate<>(Client.class);
         ///
         dbServiceClient = new DbServiceClientImpl(transactionManager, clientTemplate);
-    }
-
-    public DBServiceClient getDbServiceClient() {
-        return dbServiceClient;
     }
 }

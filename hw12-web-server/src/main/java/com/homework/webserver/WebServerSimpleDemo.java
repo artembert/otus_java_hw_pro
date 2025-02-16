@@ -1,7 +1,9 @@
 package com.homework.webserver;
 
+import com.homework.webserver.crm.service.DBServiceClient;
 import com.homework.webserver.server.UsersWebServer;
 import com.homework.webserver.server.UsersWebServerSimple;
+import com.homework.webserver.services.DatabaseManager;
 import com.homework.webserver.services.TemplateProcessor;
 import com.homework.webserver.services.TemplateProcessorImpl;
 
@@ -23,8 +25,10 @@ public class WebServerSimpleDemo {
 
     public static void main(String[] args) throws Exception {
         TemplateProcessor templateProcessor = new TemplateProcessorImpl(TEMPLATES_DIR);
+        var databaseManager = new DatabaseManager();
+        DBServiceClient dbServiceClient = databaseManager.getDbServiceClient();
 
-        UsersWebServer usersWebServer = new UsersWebServerSimple(WEB_SERVER_PORT, templateProcessor);
+        UsersWebServer usersWebServer = new UsersWebServerSimple(WEB_SERVER_PORT, templateProcessor, dbServiceClient);
 
         usersWebServer.start();
         usersWebServer.join();

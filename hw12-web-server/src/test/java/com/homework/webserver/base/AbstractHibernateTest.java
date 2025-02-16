@@ -1,6 +1,6 @@
 package com.homework.webserver.base;
 
-import static com.homework.webserver.demo.DbServiceDemo.HIBERNATE_CFG_FILE;
+import static com.homework.webserver.services.DatabaseManager.HIBERNATE_CFG_FILE;
 
 import com.homework.webserver.core.repository.DataTemplateHibernate;
 import com.homework.webserver.core.repository.HibernateUtils;

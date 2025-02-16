@@ -1,9 +1,11 @@
 package com.homework.webserver;
 
+import com.homework.webserver.crm.service.DBServiceClient;
 import com.homework.webserver.dao.InMemoryUserDao;
 import com.homework.webserver.dao.UserDao;
 import com.homework.webserver.server.UsersWebServer;
 import com.homework.webserver.server.UsersWebServerWithFilterBasedSecurity;
+import com.homework.webserver.services.DatabaseManager;
 import com.homework.webserver.services.TemplateProcessor;
 import com.homework.webserver.services.TemplateProcessorImpl;
 import com.homework.webserver.services.UserAuthService;
@@ -29,9 +31,11 @@ public class WebServerWithFilterBasedSecurityDemo {
         UserDao userDao = new InMemoryUserDao();
         TemplateProcessor templateProcessor = new TemplateProcessorImpl(TEMPLATES_DIR);
         UserAuthService authService = new UserAuthServiceImpl(userDao);
+        var databaseManager = new DatabaseManager();
+        DBServiceClient dbServiceClient = databaseManager.getDbServiceClient();
 
-        UsersWebServer usersWebServer =
-                new UsersWebServerWithFilterBasedSecurity(WEB_SERVER_PORT, authService, templateProcessor);
+        UsersWebServer usersWebServer = new UsersWebServerWithFilterBasedSecurity(
+                WEB_SERVER_PORT, authService, templateProcessor, dbServiceClient);
 
         usersWebServer.start();
         usersWebServer.join();

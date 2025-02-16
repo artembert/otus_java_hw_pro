@@ -7,6 +7,7 @@ import static org.mockito.Mockito.mock;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.homework.webserver.crm.service.DBServiceClient;
 import com.homework.webserver.dao.UserDao;
 import com.homework.webserver.model.User;
 import com.homework.webserver.server.UsersWebServer;
@@ -43,12 +44,13 @@ class UsersWebServerImplTest {
         http = HttpClient.newHttpClient();
 
         TemplateProcessor templateProcessor = mock(TemplateProcessor.class);
+        DBServiceClient dbServiceClient = mock(DBServiceClient.class);
         UserDao userDao = mock(UserDao.class);
 
         given(userDao.findById(DEFAULT_USER_ID)).willReturn(Optional.of(DEFAULT_USER));
 
         gson = new GsonBuilder().serializeNulls().create();
-        webServer = new UsersWebServerSimple(WEB_SERVER_PORT, templateProcessor);
+        webServer = new UsersWebServerSimple(WEB_SERVER_PORT, templateProcessor, dbServiceClient);
         webServer.start();
     }
 

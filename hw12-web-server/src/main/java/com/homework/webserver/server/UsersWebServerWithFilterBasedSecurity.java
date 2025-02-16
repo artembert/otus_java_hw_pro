@@ -1,5 +1,6 @@
 package com.homework.webserver.server;
 
+import com.homework.webserver.crm.service.DBServiceClient;
 import com.homework.webserver.services.TemplateProcessor;
 import com.homework.webserver.services.UserAuthService;
 import com.homework.webserver.servlet.AuthorizationFilter;
@@ -14,8 +15,11 @@ public class UsersWebServerWithFilterBasedSecurity extends UsersWebServerSimple 
     private final UserAuthService authService;
 
     public UsersWebServerWithFilterBasedSecurity(
-            int port, UserAuthService authService, TemplateProcessor templateProcessor) {
-        super(port, templateProcessor);
+            int port,
+            UserAuthService authService,
+            TemplateProcessor templateProcessor,
+            DBServiceClient dbServiceClient) {
+        super(port, templateProcessor, dbServiceClient);
         this.authService = authService;
     }
 

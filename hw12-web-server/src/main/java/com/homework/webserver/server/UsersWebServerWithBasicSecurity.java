@@ -1,5 +1,6 @@
 package com.homework.webserver.server;
 
+import com.homework.webserver.crm.service.DBServiceClient;
 import com.homework.webserver.services.TemplateProcessor;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,8 +19,9 @@ public class UsersWebServerWithBasicSecurity extends UsersWebServerSimple {
 
     private final LoginService loginService;
 
-    public UsersWebServerWithBasicSecurity(int port, LoginService loginService, TemplateProcessor templateProcessor) {
-        super(port, templateProcessor);
+    public UsersWebServerWithBasicSecurity(
+            int port, LoginService loginService, TemplateProcessor templateProcessor, DBServiceClient dbServiceClient) {
+        super(port, templateProcessor, dbServiceClient);
         this.loginService = loginService;
     }
 

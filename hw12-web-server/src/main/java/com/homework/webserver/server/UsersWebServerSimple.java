@@ -1,5 +1,6 @@
 package com.homework.webserver.server;
 
+import com.homework.webserver.crm.service.DBServiceClient;
 import com.homework.webserver.helpers.FileSystemHelper;
 import com.homework.webserver.services.TemplateProcessor;
 import com.homework.webserver.servlet.ClientsServlet;
@@ -14,10 +15,12 @@ public class UsersWebServerSimple implements UsersWebServer {
     private static final String COMMON_RESOURCES_DIR = "static";
 
     protected final TemplateProcessor templateProcessor;
+    protected final DBServiceClient dbServiceClient;
     private final Server server;
 
-    public UsersWebServerSimple(int port, TemplateProcessor templateProcessor) {
+    public UsersWebServerSimple(int port, TemplateProcessor templateProcessor, DBServiceClient dbServiceClient) {
         this.templateProcessor = templateProcessor;
+        this.dbServiceClient = dbServiceClient;
         server = new Server(port);
     }
 
@@ -67,7 +70,8 @@ public class UsersWebServerSimple implements UsersWebServer {
 
     private ServletContextHandler createServletContextHandler() {
         ServletContextHandler servletContextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        servletContextHandler.addServlet(new ServletHolder(new ClientsServlet(templateProcessor)), "/clients");
+        servletContextHandler.addServlet(
+                new ServletHolder(new ClientsServlet(templateProcessor, dbServiceClient)), "/clients");
         return servletContextHandler;
     }
 }

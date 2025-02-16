@@ -3,7 +3,7 @@ package com.homework.webserver.servlet;
 import com.homework.webserver.crm.model.Address;
 import com.homework.webserver.crm.model.Client;
 import com.homework.webserver.crm.model.Phone;
-import com.homework.webserver.services.DatabaseManager;
+import com.homework.webserver.crm.service.DBServiceClient;
 import com.homework.webserver.services.TemplateProcessor;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,11 +22,11 @@ public class ClientsServlet extends HttpServlet {
     private static final String PARAM_PHONE = "phone";
     private static final Logger log = LoggerFactory.getLogger(ClientsServlet.class);
     private final transient TemplateProcessor templateProcessor;
-    private final transient DatabaseManager databaseManager;
+    private final transient DBServiceClient dbServiceClient;
 
-    public ClientsServlet(TemplateProcessor templateProcessor) {
+    public ClientsServlet(TemplateProcessor templateProcessor, DBServiceClient dbServiceClient) {
         this.templateProcessor = templateProcessor;
-        this.databaseManager = new DatabaseManager();
+        this.dbServiceClient = dbServiceClient;
     }
 
     private static boolean isStringEmpty(final String s) {
@@ -57,7 +57,7 @@ public class ClientsServlet extends HttpServlet {
 
     private HashMap<String, Object> getParamsMap() {
         HashMap<String, Object> paramsMap = new HashMap<>();
-        var clients = databaseManager.getDbServiceClient().findAll();
+        var clients = dbServiceClient.findAll();
         if (clients != null) {
             paramsMap.put("clients", clients);
         }
@@ -65,8 +65,6 @@ public class ClientsServlet extends HttpServlet {
     }
 
     private void insertClient(String name, String address, String phone) {
-        databaseManager
-                .getDbServiceClient()
-                .saveClient(new Client(null, name, new Address(null, address), List.of(new Phone(null, phone))));
+        dbServiceClient.saveClient(new Client(null, name, new Address(null, address), List.of(new Phone(null, phone))));
     }
 }
