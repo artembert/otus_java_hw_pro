@@ -46,7 +46,7 @@ public class UsersWebServerSimple implements UsersWebServer {
 
         Handler.Sequence sequence = new Handler.Sequence();
         sequence.addHandler(resourceHandler);
-        sequence.addHandler(applySecurity(servletContextHandler, "/users", "/api/user/*"));
+        sequence.addHandler(applySecurity(servletContextHandler, "/clients", "/clients/*"));
 
         server.setHandler(sequence);
     }
