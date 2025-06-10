@@ -1,6 +1,6 @@
 <!doctype html>
-<html lang="en">
-<#include "components/head.html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:insert="~{components/head}" th:with="title='Clients'"></th:block>
 <body class="xp grid place-items-center p-8 h-screen">
 <div class="flex gap-10">
     <div class="window">
