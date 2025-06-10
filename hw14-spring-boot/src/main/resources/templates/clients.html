@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="window-body">
-            <#include "components/clients-table.html">
+            <th:block th:insert="~{components/clients-table}" th:with="clients=${clients}"></th:block>
         </div>
     </div>
 </div>
