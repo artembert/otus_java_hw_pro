@@ -1,27 +1,37 @@
 package com.hwspringboot.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
-import org.springframework.data.relational.core.mapping.Table;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceCreator;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Persistable;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
 @Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "address")
-public class Address {
+public class Address implements Persistable<Long> {
     @Id
-    @SequenceGenerator(name = "address_gen", sequenceName = "address_seq", initialValue = 1, allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_gen")
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @Column("id")
+    public final Long id;
+    private final String street;
 
-    private String street;
+    @Transient
+    private final boolean isNew;
+
+    public Address(Long id, String street, boolean isNew) {
+        this.id = id;
+        this.street = street;
+        this.isNew = isNew;
+    }
+
+    @PersistenceCreator
+    public Address(Long id, String street) {
+        this(id, street, false);
+    }
+
+    @Override
+    public boolean isNew() {
+        return isNew;
+    }
 }

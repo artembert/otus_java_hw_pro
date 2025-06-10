@@ -1,43 +1,38 @@
 package com.hwspringboot.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.SequenceGenerator;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceCreator;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Persistable;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Getter
-@Setter
-@NoArgsConstructor
 @Table(name = "phone")
-public class Phone {
+public class Phone implements Persistable<Long> {
     @Id
-    @SequenceGenerator(name = "phone_gen", sequenceName = "phone_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "phone_gen")
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @Column("id")
+    public final Long id;
+    public final Long clientId;
+    private final String number;
+    @Transient
+    private final boolean isNew;
 
-    @Column(name = "number")
-    private String number;
-
-    @ManyToOne
-    @JoinColumn(name = "client_id")
-    private Client client;
-
-    public Phone(Long id, String number) {
+    public Phone(Long id, String number, Long clientId, boolean isNew) {
         this.id = id;
         this.number = number;
+        this.clientId = clientId;
+        this.isNew = isNew;
     }
 
-    public Phone(Long id, String number, Client client) {
-        this.id = id;
-        this.number = number;
-        this.client = client;
+    @PersistenceCreator
+    public Phone(Long id, String number, Long clientId) {
+        this(id, number, clientId, false);
+    }
+
+    @Override
+    public boolean isNew() {
+        return isNew;
     }
 }

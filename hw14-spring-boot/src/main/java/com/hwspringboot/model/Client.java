@@ -1,72 +1,70 @@
 package com.hwspringboot.model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.SequenceGenerator;
-import org.springframework.data.relational.core.mapping.Table;
+import jakarta.annotation.Nonnull;
 import java.util.List;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.NonNull;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceCreator;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Persistable;
+import org.springframework.data.relational.core.mapping.MappedCollection;
+import org.springframework.data.relational.core.mapping.Table;
 
 @Getter
-@Setter
-@NoArgsConstructor
 @Table(name = "client")
-public class Client implements Cloneable {
+public class Client implements Persistable<Long> {
 
+    private final String name;
+    @Transient
+    private final boolean isNew;
     @Id
-    @SequenceGenerator(name = "client_gen", sequenceName = "client_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_gen")
-    @Column(name = "id")
+    @Nonnull
     private Long id;
-
-    @Column(name = "name")
-    private String name;
-
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "address_id")
+    @MappedCollection(idColumn = "id")
     private Address address;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JoinColumn(name = "client_id", updatable = false)
+    @MappedCollection(idColumn = "client_id", keyColumn = "id")
     private List<Phone> phones;
 
     public Client(String name) {
         this.id = null;
         this.name = name;
+        this.isNew = true;
     }
 
-    public Client(Long id, String name) {
+    public Client(Long id, String name, boolean isNew) {
         this.id = id;
         this.name = name;
+        this.isNew = isNew;
     }
 
-    public Client(Long id, String name, Address address, List<Phone> phones) {
+    public Client(Long id, String name, Address address, List<Phone> phones, Boolean isNew) {
         this.id = id;
         this.name = name;
         this.address = new Address(address.getId(), address.getStreet());
         this.phones = phones.stream()
-                .map(phone -> new Phone(phone.getId(), phone.getNumber(), this))
+            .map(phone -> new Phone(phone.getId(), phone.getNumber(), id, false))
                 .toList();
+        this.isNew = isNew;
     }
 
-    @Override
-    @SuppressWarnings({"java:S2975", "java:S1182"})
-    public Client clone() {
-        return new Client(this.id, this.name, this.address, this.phones);
+    @PersistenceCreator
+    public Client(Long id, String name, Address address) {
+        this(id, name, address, List.of(), false);
     }
 
-    @Override
     public String toString() {
         return "Client{" + "id=" + id + ", name='" + name + '\'' + '}';
+    }
+
+    @Override
+    public boolean isNew() {
+        return isNew;
+    }
+
+    @Override
+    public @NonNull Long getId() {
+        return id;
     }
 }
