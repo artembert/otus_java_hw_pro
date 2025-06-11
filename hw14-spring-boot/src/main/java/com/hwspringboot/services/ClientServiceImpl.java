@@ -1,7 +1,9 @@
 package com.hwspringboot.services;
 
 import com.hwspringboot.controllers.model.ClientCreatePayload;
+import com.hwspringboot.model.Address;
 import com.hwspringboot.model.Client;
+import com.hwspringboot.model.Phone;
 import com.hwspringboot.repositories.ClientRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +13,10 @@ import org.springframework.stereotype.Service;
 public class ClientServiceImpl implements ClientService {
     private final ClientRepository clientRepository;
     private final AddressService addressService;
-    private final PhoneService phoneService;
 
-    public ClientServiceImpl(@Autowired ClientRepository clientRepository, @Autowired AddressService addressService,
-                             @Autowired PhoneService phoneService) {
+    public ClientServiceImpl(@Autowired ClientRepository clientRepository, @Autowired AddressService addressService) {
         this.clientRepository = clientRepository;
         this.addressService = addressService;
-        this.phoneService = phoneService;
     }
 
     public List<Client> findAll() {
@@ -25,8 +24,8 @@ public class ClientServiceImpl implements ClientService {
     }
 
     public Client save(ClientCreatePayload payload) {
-        var address = addressService.create(payload.address());
-        var phone = phoneService.create(payload.phone(), address.id());
+        var address = new Address(null, payload.address(), true);
+        var phone = new Phone(null, payload.phone(), null, true);
         var client = new Client(
             null,
             payload.name(),

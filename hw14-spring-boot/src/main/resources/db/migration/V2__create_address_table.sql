@@ -1,11 +1,10 @@
--- Для @GeneratedValue(strategy = GenerationType.SEQUENCE)
-create sequence address_SEQ start with 1 increment by 1;
-
 alter table client
     add address_id bigint;
 
+create sequence address_seq start with 1;
+
 create table address
 (
-    id     bigint       not null primary key,
+    id bigint not null default nextval('address_seq') primary key,
     street varchar(300) not null
 );

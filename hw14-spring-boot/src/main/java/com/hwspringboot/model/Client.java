@@ -42,9 +42,9 @@ public class Client implements Persistable<Long> {
     public Client(Long id, String name, Address address, List<Phone> phones, Boolean isNew) {
         this.id = id;
         this.name = name;
-        this.address = new Address(null, address.street());
+        this.address = address;
         this.phones = phones.stream()
-            .map(phone -> new Phone(phone.getId(), phone.getNumber(), id, false))
+            .map(phone -> new Phone(phone.getId(), phone.getNumber(), id))
                 .toList();
         this.isNew = isNew;
     }

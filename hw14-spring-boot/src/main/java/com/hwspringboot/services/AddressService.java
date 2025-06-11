@@ -14,7 +14,7 @@ public class AddressService {
     }
 
     public Address create(String street) {
-        var address = new Address(null, street);
+        var address = new Address(null, street, true);
         return addressRepository.save(address);
     }
 }
