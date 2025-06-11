@@ -1,6 +1,7 @@
 package com.hwspringboot.controllers;
 
 import com.hwspringboot.controllers.model.ClientCreatePayload;
+import com.hwspringboot.dto.ClientDto;
 import com.hwspringboot.model.Client;
 import com.hwspringboot.services.ClientService;
 import java.io.IOException;
@@ -35,7 +36,8 @@ public class ClientRestController {
         if (client == null || client.name() == null || client.address() == null || client.phone() == null) {
             throw new IllegalArgumentException("Invalid client data");
         }
-        clientService.save(client);
+        var clientDto = new ClientDto(null, client.name(), client.address(), client.phone());
+        clientService.save(clientDto.toClient());
         return new RedirectView("/clients");
     }
 }
