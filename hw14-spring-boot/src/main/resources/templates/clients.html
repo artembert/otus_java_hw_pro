@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:insert="~{components/head}" th:with="title='Clients'"></th:block>
+<body class="xp grid place-items-center p-8 h-screen">
+<div class="flex gap-10">
+    <div class="window">
+        <div class="title-bar">
+            <div class="title-bar-text">Admin - Clients</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize"></button>
+                <button aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <form action="/api/v1/clients/create" id="client-form" method="post" name="client-form">
+                <fieldset>
+                    <legend>Create New Client</legend>
+                    <div class="field-row-stacked" style="width: 200px">
+                        <label for="name">Name</label>
+                        <input id="name" name="name" required type="text"/>
+                    </div>
+                    <div class="field-row-stacked" style="width: 200px">
+                        <label for="address">Address</label>
+                        <input id="address" name="address" required type="text"/>
+                    </div>
+                    <div class="field-row-stacked" style="width: 200px">
+                        <label for="phone">Phone</label>
+                        <input id="phone" name="phone" required type="text"/>
+                    </div>
+                    <div class="flex justify-end">
+                        <button class="mt-4" type="submit">Add Client</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+    <div class="window">
+        <div class="title-bar">
+            <div class="title-bar-text">Admin - Clients (2)</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize"></button>
+                <button aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <th:block th:insert="~{components/clients-table}" th:with="clients=${clients}"></th:block>
+        </div>
+    </div>
+</div>
+</body>
+</html>

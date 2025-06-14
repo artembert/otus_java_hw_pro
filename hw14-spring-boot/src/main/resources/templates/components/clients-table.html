@@ -1,0 +1,25 @@
+<table class="table-auto border-separate border-spacing-2 border border-gray-400 dark:border-gray-500"
+       th:if="${clients != null && !clients.isEmpty()}">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Phones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="client : ${clients}">
+        <td th:text="${client.id}">ID</td>
+        <td th:text="${client.name}">Name</td>
+        <td th:text="${client.address.street}">Address</td>
+        <td>
+            <span th:each="phone, iterStat : ${client.phones}">
+                <span th:text="${phone.number}">Phone</span>
+                <br th:if="${!iterStat.last}"/>
+            </span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<p th:if="${clients == null || clients.isEmpty()}">No clients found.</p>

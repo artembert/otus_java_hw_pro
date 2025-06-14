@@ -1,0 +1,3 @@
+*, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: content-box;
+}
