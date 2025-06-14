@@ -32,8 +32,8 @@ public class ClientDto {
 
     public Client toClient() {
         Set<Phone> phoneSet = Arrays.stream(this.getPhones().split(","))
-            .map(s -> new Phone(null, s.trim(), this.id))
-            .collect(Collectors.toSet());
+                .map(s -> new Phone(null, s.trim(), this.id))
+                .collect(Collectors.toSet());
         return new Client(this.getId(), this.getName(), new Address(null, this.getAddress(), this.getId()), phoneSet);
     }
 }

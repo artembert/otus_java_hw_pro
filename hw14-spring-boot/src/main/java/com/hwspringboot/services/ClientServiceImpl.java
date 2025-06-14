@@ -19,7 +19,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public List<Client> findAll() {
         return StreamSupport.stream(clientRepository.findAll().spliterator(), false)
-            .toList();
+                .toList();
     }
 
     @Override
