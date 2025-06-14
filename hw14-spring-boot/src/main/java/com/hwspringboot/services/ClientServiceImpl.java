@@ -3,6 +3,7 @@ package com.hwspringboot.services;
 import com.hwspringboot.model.Client;
 import com.hwspringboot.repositories.ClientRepository;
 import java.util.List;
+import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +18,8 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<Client> findAll() {
-        return clientRepository.findAll();
+        return StreamSupport.stream(clientRepository.findAll().spliterator(), false)
+            .toList();
     }
 
     @Override
