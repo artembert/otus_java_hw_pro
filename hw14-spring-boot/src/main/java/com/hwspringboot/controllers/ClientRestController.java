@@ -1,6 +1,6 @@
 package com.hwspringboot.controllers;
 
-import com.hwspringboot.controllers.model.ClientCreatePayload;
+import com.hwspringboot.dto.ClientCreatePayload;
 import com.hwspringboot.dto.ClientDto;
 import com.hwspringboot.model.Client;
 import com.hwspringboot.services.ClientService;
