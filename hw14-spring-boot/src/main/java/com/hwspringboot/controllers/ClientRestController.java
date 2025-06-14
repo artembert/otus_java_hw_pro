@@ -4,7 +4,6 @@ import com.hwspringboot.controllers.model.ClientCreatePayload;
 import com.hwspringboot.dto.ClientDto;
 import com.hwspringboot.model.Client;
 import com.hwspringboot.services.ClientService;
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ public class ClientRestController {
     }
 
     @PostMapping("/create")
-    public RedirectView createClient(@ModelAttribute ClientCreatePayload client) throws IOException {
+    public RedirectView createClient(@ModelAttribute ClientCreatePayload client) {
         if (client == null || client.name() == null || client.address() == null || client.phone() == null) {
             throw new IllegalArgumentException("Invalid client data");
         }
