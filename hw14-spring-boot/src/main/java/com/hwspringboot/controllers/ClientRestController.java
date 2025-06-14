@@ -31,7 +31,7 @@ public class ClientRestController {
     }
 
     @PostMapping("/create")
-    public RedirectView createClient(@ModelAttribute ClientCreatePayload client) {
+    public RedirectView newClient(@ModelAttribute ClientCreatePayload client) {
         if (client == null || client.name() == null || client.address() == null || client.phone() == null) {
             throw new IllegalArgumentException("Invalid client data");
         }
